@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Reflow · Haul Exporter",
+  "version": "3.1.0",
+  "description": "Exportiert Bestellungen von GTBuy, ACBuy & CNFans als TSV für Google Sheets – Teil des Reflow Haul-Tracking-Systems.",
+  "permissions": ["storage", "clipboardWrite", "activeTab", "scripting"],
+  "host_permissions": [
+    "https://gtbuy.com/*",
+    "https://test-api.gtbuy.com/*",
+    "https://www.acbuy.com/*",
+    "https://cnfans.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Reflow · Haul Exporter"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://gtbuy.com/*"],
+      "js": ["content-gtbuy.js"],
+      "run_

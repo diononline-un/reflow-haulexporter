@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reflow · Haul Exporter</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+      background: #0d1117;
+      color: #e2e8f0;
+      width: 360px;
+      padding: 0;
+    }
+
+    /* ── Header (sidebar-style like Reflow app) ───────────────────── */
+    .rf-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px 12px;
+      border-bottom: 1px solid #1e293b;
+      background: #0d1117;
+    }
+
+    .rf-logo {
+      width: 32px;
+      height: 32px;
+      background: #6366f1;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -.5px;
+      flex-shrink: 0;
+    }
+
+    .rf-title {
+      display: flex;
+      flex-direction: column;
+    }
+    .rf-title span:first-child {
+      font-size: 14px;
+      font-weight: 700;
+      color: #f8fafc;
+      line-height: 1.2;
+    }
+    .rf-title span:last-child {
+      font-size: 10px;
+      color: #64748b;
+      font-weight: 500;
+      letter-spacing: .3px;
+    }
+
+    .rf-badge-wrap {
+      margin-left: auto;
+    }
+
+    /* ── Agent badge ─────────────────────────────────────────────── */
+    .badge {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 99px;
+      font-weight: 700;
+      letter-spacing: .4px;
+    }
+    .badge-gtbuy  { background: #312e81; color: #a5b4fc; border: 1px solid #4338ca; }
+    .badge-acbuy  { background: #14532d; color: #86efac; border: 1px solid #16a34a; }
+    .badge-cnfans { background: #7f1d1d; color: #fca5a5; border: 1px solid #dc2626; }
+    .badge-unknown{ background: #1e293b; color: #64748b; border: 1px solid #334155; }
+
+    /* ── Content area ─────────────────────────────────────────────── */
+    .rf-body {
+      padding: 12px 14px;
+    }
+
+    /* ── Site indicator ───────────────────────────────────────────── */
+    .site-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 7px;
+      padding: 8px 11px;
+      margin-bottom: 10px;
+      font-size: 11px;
+      color: #64748b;
+    }
+    .site-indicator .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #334155;
+      flex-shrink: 0;
+    }
+    .site-indicator.active .dot { background: #22c55e; box-shadow: 0 0 0 2px #14532d; }
+    .site-indicator strong { color: #f1f5f9; font-size: 12px; }
+
+    /* ── Card sections ────────────────────────────────────────────── */
+    .section {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 7px;
+      padding: 11px 12px;
+      margin-bottom: 9px;
+    }
+
+    .section-label {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #334155;
+      margin-bottom: 9px;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      flex: 1;
+      font-size: 11px;
+      color: #64748b;
+      margin-bottom: 7px;
+    }
+    label:last-child { margin-bottom: 0; }
+
+    input[type="text"], input:not([type]) {
+      background: #0d1117;
+      border: 1px solid #1e293b;
+      border-radius: 5px;
+      padding: 6px 8px;
+      color: #f1f5f9;
+      font-size: 11px;
+      font-family: 'Courier New', monospace;
+      width: 100%;
+      outline: none;
+      transition: border-color .15s;
+    }
+    input[type="text"]:focus, input:not([type]):focus { border-color: #6366f1; }
+    input::placeholder { color: #334155; }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid #1e293b;
+    }
+    input[type="checkbox"] { width: auto; accent-color: #6366f1; }
+
+    .hint {
+      font-size: 10px;
+      color: #334155;
+      margin-top: 7px;
+      line-height: 1.5;
+   
