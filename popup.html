@@ -15,7 +15,7 @@
       padding: 0;
     }
 
-    /* ── Header (sidebar-style like Reflow app) ───────────────────── */
+    /* ── Header ─────────────────────────────────────────────────────── */
     .rf-header {
       display: flex;
       align-items: center;
@@ -59,9 +59,109 @@
 
     .rf-badge-wrap {
       margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    /* ── Agent badge ─────────────────────────────────────────────── */
+    /* ── Language selector ───────────────────────────────────────────── */
+    .lang-wrap {
+      position: relative;
+    }
+
+    .lang-btn {
+      background: none;
+      border: 1px solid #1e293b;
+      border-radius: 6px;
+      color: #64748b;
+      cursor: pointer;
+      font-size: 13px;
+      padding: 3px 7px;
+      line-height: 1;
+      transition: color .15s, border-color .15s, background .15s;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .lang-btn:hover { color: #94a3b8; border-color: #334155; background: #0f172a; }
+
+    .lang-btn-icon {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .lang-btn-icon svg {
+      width: 12px;
+      height: 12px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      flex-shrink: 0;
+    }
+    .lang-btn-gear {
+      font-size: 11px;
+      opacity: .8;
+    }
+
+    .lang-dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: calc(100% + 6px);
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      padding: 10px 12px;
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.5);
+      min-width: 110px;
+    }
+    .lang-dropdown.open { display: flex; }
+
+    .lang-dropdown-header {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #475569;
+      width: 100%;
+      padding-bottom: 7px;
+      border-bottom: 1px solid #1e293b;
+    }
+    .lang-dropdown-header svg {
+      width: 11px;
+      height: 11px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      flex-shrink: 0;
+    }
+
+    .lang-flags {
+      display: flex;
+      gap: 6px;
+    }
+
+    .lang-flag {
+      background: none;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 22px;
+      padding: 4px 6px;
+      line-height: 1;
+      transition: border-color .15s, background .15s;
+    }
+    .lang-flag:hover { background: #1e293b; }
+    .lang-flag.active { border-color: #6366f1; background: #1e1e3a; }
+
+    /* ── Agent badge ─────────────────────────────────────────────────── */
     .badge {
       font-size: 10px;
       padding: 2px 8px;
@@ -74,12 +174,12 @@
     .badge-cnfans { background: #7f1d1d; color: #fca5a5; border: 1px solid #dc2626; }
     .badge-unknown{ background: #1e293b; color: #64748b; border: 1px solid #334155; }
 
-    /* ── Content area ─────────────────────────────────────────────── */
+    /* ── Content area ────────────────────────────────────────────────── */
     .rf-body {
       padding: 12px 14px;
     }
 
-    /* ── Site indicator ───────────────────────────────────────────── */
+    /* ── Site indicator ──────────────────────────────────────────────── */
     .site-indicator {
       display: flex;
       align-items: center;
@@ -102,7 +202,7 @@
     .site-indicator.active .dot { background: #22c55e; box-shadow: 0 0 0 2px #14532d; }
     .site-indicator strong { color: #f1f5f9; font-size: 12px; }
 
-    /* ── Card sections ────────────────────────────────────────────── */
+    /* ── Card sections ───────────────────────────────────────────────── */
     .section {
       background: #0f172a;
       border: 1px solid #1e293b;
@@ -163,4 +263,180 @@
       color: #334155;
       margin-top: 7px;
       line-height: 1.5;
-   
+    }
+
+    /* ── Range inputs row ────────────────────────────────────────────── */
+    .range-row {
+      display: flex;
+      gap: 7px;
+    }
+
+    /* ── Saved range display ─────────────────────────────────────────── */
+    .saved-range {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      color: #475569;
+      margin-top: 6px;
+      padding: 5px 8px;
+      background: #0d1117;
+      border-radius: 5px;
+      border: 1px solid #1e293b;
+    }
+    .saved-range strong { color: #64748b; font-family: 'Courier New', monospace; }
+
+    /* ── Range buttons ───────────────────────────────────────────────── */
+    .range-btns {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .btn-sm {
+      flex: 1;
+      background: #0d1117;
+      border: 1px solid #1e293b;
+      border-radius: 5px;
+      color: #475569;
+      cursor: pointer;
+      font-size: 10px;
+      padding: 5px 8px;
+      transition: border-color .15s, color .15s;
+    }
+    .btn-sm:hover { border-color: #334155; color: #64748b; }
+
+    /* ── Export button ───────────────────────────────────────────────── */
+    .btn-export {
+      width: 100%;
+      background: #6366f1;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 9px;
+      margin-bottom: 9px;
+      transition: background .15s, opacity .15s;
+    }
+    .btn-export:hover:not(:disabled) { background: #4f46e5; }
+    .btn-export:disabled { opacity: .4; cursor: not-allowed; }
+
+    /* ── Status message ──────────────────────────────────────────────── */
+    #status {
+      font-size: 11px;
+      color: #64748b;
+      text-align: center;
+      min-height: 16px;
+      padding: 0 4px 2px;
+    }
+    #status.error { color: #f87171; }
+    #status.ok    { color: #4ade80; }
+  </style>
+</head>
+<body>
+
+  <div class="rf-header">
+    <div class="rf-logo">R</div>
+    <div class="rf-title">
+      <span>Reflow</span>
+      <span data-i18n="subtitle">Haul Exporter</span>
+    </div>
+
+    <div class="rf-badge-wrap">
+
+      <!-- Language / Settings selector -->
+      <div class="lang-wrap">
+        <button class="lang-btn" id="langBtn" title="Language / Sprache">
+          <span class="lang-btn-icon">
+            <!-- Globe SVG -->
+            <svg viewBox="0 0 16 16">
+              <circle cx="8" cy="8" r="6.5"/>
+              <path d="M8 1.5C6.5 3.5 5.5 5.6 5.5 8s1 4.5 2.5 6.5"/>
+              <path d="M8 1.5C9.5 3.5 10.5 5.6 10.5 8s-1 4.5-2.5 6.5"/>
+              <path d="M1.5 8h13M2.2 5.2h11.6M2.2 10.8h11.6"/>
+            </svg>
+            <span class="lang-btn-gear">⚙</span>
+          </span>
+        </button>
+
+        <div class="lang-dropdown" id="langDropdown">
+          <div class="lang-dropdown-header">
+            <!-- Globe SVG -->
+            <svg viewBox="0 0 16 16">
+              <circle cx="8" cy="8" r="6.5"/>
+              <path d="M8 1.5C6.5 3.5 5.5 5.6 5.5 8s1 4.5 2.5 6.5"/>
+              <path d="M8 1.5C9.5 3.5 10.5 5.6 10.5 8s-1 4.5-2.5 6.5"/>
+              <path d="M1.5 8h13M2.2 5.2h11.6M2.2 10.8h11.6"/>
+            </svg>
+            Language
+          </div>
+          <div class="lang-flags">
+            <button class="lang-flag active" data-lang="de" id="langDe" title="Deutsch">🇩🇪</button>
+            <button class="lang-flag" data-lang="en" id="langEn" title="English">🇬🇧</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agent site badge -->
+      <span class="badge badge-unknown" id="siteBadge">–</span>
+    </div>
+  </div>
+
+  <div class="rf-body">
+
+    <!-- Site indicator -->
+    <div class="site-indicator" id="siteIndicator">
+      <span class="dot"></span>
+      <span id="siteLabel"></span>
+    </div>
+
+    <!-- Order range section -->
+    <div class="section">
+      <div class="section-label" data-i18n="rangeLabel">Bestellbereich</div>
+
+      <div class="range-row">
+        <label>
+          <span data-i18n="fromLabel">Von Bestellnr.</span>
+          <input type="text" id="from" autocomplete="off" spellcheck="false" />
+        </label>
+        <label>
+          <span data-i18n="toLabel">Bis Bestellnr.</span>
+          <input type="text" id="to" autocomplete="off" spellcheck="false" />
+        </label>
+      </div>
+
+      <div class="range-btns">
+        <button class="btn-sm" id="btnSaveRange" data-i18n="saveRange">Bereich speichern</button>
+        <button class="btn-sm" id="btnLoadRange" data-i18n="loadRange">Bereich laden</button>
+      </div>
+
+      <div class="saved-range" id="savedRange">
+        <span data-i18n="savedRangeText">Gespeicherter Bereich:</span>
+        <strong></strong>
+      </div>
+
+      <div id="filterPointsRow" class="checkbox-row" style="display:none">
+        <input type="checkbox" id="filterPoints" />
+        <span data-i18n="filterPointsLabel">Punkte-Bestellungen filtern</span>
+      </div>
+
+      <div class="hint" data-i18n="hintText">
+        Neueste Bestellnr. bei "Von", älteste bei "Bis". Leer lassen für alle.
+      </div>
+    </div>
+
+    <!-- Export button -->
+    <button class="btn-export" id="btnCopy" disabled data-i18n="btnCopy">
+      In Zwischenablage kopieren
+    </button>
+
+    <!-- Status -->
+    <div id="status"></div>
+
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
